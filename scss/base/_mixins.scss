@@ -1,0 +1,41 @@
+@mixin reset-clickable {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+  vertical-align: top;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  text-align: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+
+@mixin hover-only-transition($properties...){
+  transition-property: $properties;
+  transition-duration: .3s;
+}
+
+@mixin animation-transition($properties...){
+  transition-property: $properties;
+  transition-duration: .3s;
+}

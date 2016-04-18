@@ -1,1 +1,8 @@
-@import 'base/base';
+
+@import 'base/normalize',
+        'base/mixins',
+        'base/font',
+        'base/colors',
+        'base/base';
+
+@import 'blocks/1index';

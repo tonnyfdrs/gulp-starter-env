@@ -1,8 +1,9 @@
 var gulp        = require('gulp'),
     sass        = require('gulp-sass'),
     rename      = require('gulp-rename'),
-    cssmin      = require('gulp-minify-css'),
+    cssmin      = require('gulp-cssnano'),
     concat      = require('gulp-concat'),
+    sourcemaps   = require('gulp-sourcemaps'),
     uglify      = require('gulp-uglify'),
     jshint      = require('gulp-jshint'),
     scsslint    = require('gulp-sass-lint'),
@@ -13,11 +14,10 @@ var gulp        = require('gulp'),
     minifyHTML  = require('gulp-minify-html'),
     size        = require('gulp-size'),
     imagemin    = require('gulp-imagemin'),
-    pngquant    = require('imagemin-pngquant'),
     plumber     = require('gulp-plumber'),
     deploy      = require('gulp-gh-pages'),
-    notify      = require('gulp-notify');
-
+    notify      = require('gulp-notify'),
+    path        = require('path');
 
 gulp.task('scss', function() {
     var onError = function(err) {
@@ -32,6 +32,7 @@ gulp.task('scss', function() {
 
   return gulp.src('scss/main.scss')
     .pipe(plumber({errorHandler: onError}))
+    .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(size({ gzip: true, showFiles: true }))
     .pipe(prefix())
@@ -40,6 +41,7 @@ gulp.task('scss', function() {
     .pipe(reload({stream:true}))
     .pipe(cssmin())
     .pipe(size({ gzip: true, showFiles: true }))
+    .pipe(sourcemaps.write('/'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('dist/css'))
 });
