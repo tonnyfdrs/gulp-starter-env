@@ -93,6 +93,12 @@ gulp.task('jshint', function() {
     .pipe(jshint.reporter('default'));
 });
 
+gulp.task('etc', function() {
+    gulp.src('etc/**/*')
+    .pipe(gulp.dest('dist'))
+
+});
+
 gulp.task('watch', function() {
   gulp.watch('scss/**/*.scss', ['scss']);
   gulp.watch('js/*.js', ['jshint', 'js']);
@@ -110,4 +116,4 @@ gulp.task('imgmin', function () {
         .pipe(gulp.dest('dist/img'));
 });
 
-gulp.task('default', ['browser-sync', 'js', 'imgmin', 'minify-html', 'scss', 'watch']);
+gulp.task('default', ['browser-sync', 'etc', 'js', 'imgmin', 'minify-html', 'scss', 'watch']);
